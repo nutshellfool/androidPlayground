@@ -3,13 +3,24 @@ jdk: oraclejdk8
 sudo: false
 android:
   components:
-  - platform-tools
-  - tools
-  - build-tools-25.0.2
-  - android-22
-  - android-24
-  - sys-img-armeabi-v7a-android-22
-  - extra-android-m2repository
+    - platform-tools
+    - tools
+    - build-tools-25.0.2
+    - extra-android-m2repository
+    - extra-google-android-support
+
+    # The SDK version used to compile your project
+    - android-16
+    - android-21
+    - android-22
+    - android-25
+
+    # Specify at least one system image,
+    # if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-android-16
+    - sys-img-armeabi-v7a-android-21
+    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-25
   licenses:
     - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
