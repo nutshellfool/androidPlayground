@@ -1,22 +1,25 @@
 language: android
 jdk: oraclejdk8
 sudo: false
-
 android:
   components:
-    - platform-tools
-    - tools
-    - build-tools-24.0.2
-    - android-22
-    - android-24
-    - sys-img-armeabi-v7a-android-22
-    - extra-android-m2repository
-
+  - platform-tools
+  - tools
+  - build-tools-24.0.2
+  - android-22
+  - android-24
+  - sys-img-armeabi-v7a-android-22
+  - extra-android-m2repository
 before_script:
-  # Create and start emulator
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-
-script: ./gradlew connectedAndroidTest
+- echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+- emulator -avd test -no-skin -no-audio -no-window &
+- android-wait-for-emulator
+- adb shell input keyevent 82 &
+script: "./gradlew connectedAndroidTest"
+notifications:
+  slack:
+    rooms:
+      - secure: dpjGmTjgjrS5ZIOnnO5rdDRHnxjgxpYjrFB68KaIdgTwm/Vg9LdaprNw1HD7SR2R9WDoB6cq27CpMuTN3K8yAKDheCJyaaQrAKpYJqVnA2BDxUR2L7OZrMHCfa4zyXKEignxvSoVy7iSEuM29l1AQMtdGXYoranBFRMol1ZTG4R+l//zrGUc7ujhzrqCHITgWRhO336hAsANlLX3Fw9i4A2CQ3Jp4ocR5OBEAR9mlDk0JjBPhgtjg6KnmR4RgqAAtJQgjkpT4/rfmwMwZfP0nGv7kSToxW9xka8JPS72syhgWAirKcM3PWxIKxCvIzhOFhskeENyBINsj2xjpWkjC9JG3NLacZLBMj/ALKJmqh+Fju9emukNz2Rf6PTwbiULIh+NiAnflBeI9eoeZLu/Eba4XyVqDOTS1XS7iJ2V16sVacgdAKRWnep0yOiKowlOknyhWPYD/4hyXdkddoewGxTnml6sbu81oO7avEciAVHkeSP79xQq7aLB9XOfEJLWLqeT6vKrB+BykoN0V37stftIEwvnL4HzCe4flSyne43tOX6aWTV0Pc31fTyItqf44Z83cBb5s0TfbFO1ly/YY+olnERJ4VSZZG2NssBtiXl9aKIyD4RW0ZuQXrAzuczhSpqnPgXyR6axwe21nZJJAFzALw5T13rVCX56C571UDw=
+    on_success: change  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: false     # default: false
