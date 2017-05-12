@@ -26,6 +26,11 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
+env:
+  global:
+    - TOOLS=${ANDROID_HOME}/tools # PATH order matters, exists more than one emulator script
+    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+
 install:
   - echo yes | sdkmanager \"extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2\"
   - echo yes | sdkmanager \"extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2\"
