@@ -1,5 +1,7 @@
 package me.lirui.androidplayground;
 
+import android.app.ActivityManager;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,5 +21,11 @@ public class MemoryManageUnitTest {
         object = null;
         Assert.assertNull(object);
         Assert.assertNotNull(otherObject);
+    }
+
+    @Test
+    public void weakReferenceTest() throws Exception {
+//        ActivityManager.getMemoryClass()
+
     }
 }

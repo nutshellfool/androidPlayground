@@ -1,11 +1,18 @@
 package me.lirui.androidplayground;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.core.deps.guava.base.Strings;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.lang.ref.WeakReference;
 
 import static org.junit.Assert.*;
 
@@ -22,5 +29,32 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("me.lirui.androidplayground", appContext.getPackageName());
+    }
+
+    @Test
+    public void testWeakRef() throws Exception {
+        WeakReference<Object> weakRef = new WeakReference<Object>(new Object());
+        forceGCRecycle();
+//        Assert.assertNotNull(weakRef.get());
+        assertNotNull(weakRef.get());
+    }
+
+    private void forceGCRecycle() {
+        int available = (int)getCurrentAviliableMemory();
+        createRectangleImageByWith((int)Math.round(Math.sqrt(available)) - 1024);
+    }
+
+    private Bitmap createRectangleImageByWith(int width) {
+        Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ALPHA_8);
+        Log.d("GC test", String.format("bitmap size %d",bitmap.getByteCount()));
+        return bitmap;
+    }
+
+    private long getCurrentAviliableMemory() {
+        Runtime rt = Runtime.getRuntime();
+//        long a = rt.totalMemory() - rt.freeMemory();
+        long a = rt.maxMemory() - rt.freeMemory();
+        Log.d("GC test", String.format("aviliable memory %d", a));
+        return a;
     }
 }
