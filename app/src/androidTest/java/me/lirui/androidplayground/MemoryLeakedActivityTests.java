@@ -1,6 +1,5 @@
 package me.lirui.androidplayground;
 
-import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 

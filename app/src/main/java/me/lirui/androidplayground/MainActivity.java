@@ -1,10 +1,8 @@
 package me.lirui.androidplayground;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import junit.framework.Assert;
@@ -25,19 +23,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void forceGCRecycle() {
-        int available = (int)getCurrentAviliableMemory();
-        createRectangleImageByWith((int)Math.round(Math.sqrt(available)) - 1024);
+        int available = (int) getCurrentAviliableMemory();
+        createRectangleImageByWith((int) Math.round(Math.sqrt(available)) - 1024);
     }
 
     private Bitmap createRectangleImageByWith(int width) {
         Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ALPHA_8);
-        Log.d("GC test", String.format("bitmap size %d",bitmap.getByteCount()));
+        Log.d("GC test", String.format("bitmap size %d", bitmap.getByteCount()));
         return bitmap;
     }
 
     private long getCurrentAviliableMemory() {
         Runtime rt = Runtime.getRuntime();
-//        long a = rt.totalMemory() - rt.freeMemory();
         long a = rt.maxMemory() - rt.freeMemory();
         Log.d("GC test", String.format("aviliable memory %d", a));
         return a;

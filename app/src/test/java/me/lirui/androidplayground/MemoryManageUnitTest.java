@@ -1,7 +1,5 @@
 package me.lirui.androidplayground;
 
-import android.app.ActivityManager;
-
 import org.junit.Assert;
 import org.junit.Test;
 

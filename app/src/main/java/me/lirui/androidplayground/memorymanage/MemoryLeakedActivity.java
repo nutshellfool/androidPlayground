@@ -2,8 +2,8 @@ package me.lirui.androidplayground.memorymanage;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import me.lirui.androidplayground.R;
@@ -11,7 +11,6 @@ import me.lirui.androidplayground.R;
 public class MemoryLeakedActivity extends AppCompatActivity {
 
     private TextView mTitleTextview;
-//    private WorkerAsyncTask mWorkerAsyncTask;
 
     private class WorkerAsyncTask extends AsyncTask {
         private Activity referenceActiviy;
@@ -40,7 +39,7 @@ public class MemoryLeakedActivity extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            if(referenceActiviy instanceof MemoryLeakedActivity) {
+            if (referenceActiviy instanceof MemoryLeakedActivity) {
                 MemoryLeakedActivity leakedActivity = (MemoryLeakedActivity) referenceActiviy;
                 leakedActivity.updateUI("UI updated");
             }
@@ -55,8 +54,6 @@ public class MemoryLeakedActivity extends AppCompatActivity {
         mTitleTextview = (TextView) findViewById(R.id.memory_leaked_act_textview_title);
 
         new WorkerAsyncTask(this).execute();
-//        mWorkerAsyncTask = new WorkerAsyncTask(this);
-//        mWorkerAsyncTask.execute();
     }
 
     private void updateUI(String titleString) {

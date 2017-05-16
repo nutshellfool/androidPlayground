@@ -1,20 +1,18 @@
 package me.lirui.androidplayground;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.core.deps.guava.base.Strings;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.lang.ref.WeakReference;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -40,19 +38,18 @@ public class ExampleInstrumentedTest {
     }
 
     private void forceGCRecycle() {
-        int available = (int)getCurrentAviliableMemory();
-        createRectangleImageByWith((int)Math.round(Math.sqrt(available)) - 1024);
+        int available = (int) getCurrentAviliableMemory();
+        createRectangleImageByWith((int) Math.round(Math.sqrt(available)) - 1024);
     }
 
     private Bitmap createRectangleImageByWith(int width) {
         Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ALPHA_8);
-        Log.d("GC test", String.format("bitmap size %d",bitmap.getByteCount()));
+        Log.d("GC test", String.format("bitmap size %d", bitmap.getByteCount()));
         return bitmap;
     }
 
     private long getCurrentAviliableMemory() {
         Runtime rt = Runtime.getRuntime();
-//        long a = rt.totalMemory() - rt.freeMemory();
         long a = rt.maxMemory() - rt.freeMemory();
         Log.d("GC test", String.format("aviliable memory %d", a));
         return a;
