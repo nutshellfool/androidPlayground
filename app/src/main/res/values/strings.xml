@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidPlayground</string>
+    <string name="main_activity_jumpto_mla_button_text">Go to Leaked Activity</string>
+    <string name="main_activity_jumpto_fmla_button_text">Go to Fixed Activity</string>
 </resources>

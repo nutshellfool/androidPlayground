@@ -1,13 +1,14 @@
 package me.lirui.androidplayground;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
-import junit.framework.Assert;
-
-import java.lang.ref.WeakReference;
+import me.lirui.androidplayground.memorymanage.FixedMemoryLeakActivity;
+import me.lirui.androidplayground.memorymanage.MemoryLeakedActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Object obj = new Object();
-        WeakReference<Object> weakRef = new WeakReference<Object>(obj);
-        forceGCRecycle();
-        Assert.assertNotNull(weakRef.get());
+//        Object obj = new Object();
+//        WeakReference<Object> weakRef = new WeakReference<Object>(obj);
+//        forceGCRecycle();
+//        Assert.assertNotNull(weakRef.get());
     }
 
     private void forceGCRecycle() {
@@ -38,5 +39,15 @@ public class MainActivity extends AppCompatActivity {
         long a = rt.maxMemory() - rt.freeMemory();
         Log.d("GC test", String.format("aviliable memory %d", a));
         return a;
+    }
+
+    public void jumpToLeakedActivity(View view) {
+        Intent intent = new Intent(this, MemoryLeakedActivity.class);
+        startActivity(intent);
+    }
+
+    public void jumpToFixedLeakedActivity(View view) {
+        Intent intent = new Intent(this, FixedMemoryLeakActivity.class);
+        startActivity(intent);
     }
 }
